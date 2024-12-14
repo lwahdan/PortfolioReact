@@ -12,7 +12,6 @@ function Contact() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log(`Input changed: ${name} = ${value}`); // Debugging
     setformData({ ...formData, [name]: value });
   };
 
@@ -31,17 +30,15 @@ function Contact() {
     if (!formData.message || formData.message.trim() === "") {
       newErrors.message = "Please enter a message.";
     }
-    console.log("Validation errors:", newErrors); // Debugging
+
     if (Object.keys(newErrors).length > 0) {
-      console.log("Validation failed:", newErrors);
       setErrors(newErrors); // Update errors state
       return;
     }
-    console.log("Validation passed. Sending form...");
+
     setErrors({});
     setStatus(" Sending...");
     setTimeout(() => {
-      console.log("Form successfully sent.");
       setStatus("Your message has been sent. Thank you!");
       setformData({
         name: "",
