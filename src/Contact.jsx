@@ -8,7 +8,6 @@ function Contact() {
   });
 
   const [errors, setErrors] = useState({});
-
   const [status, setStatus] = useState("");
 
   const handleInputChange = (e) => {
@@ -18,8 +17,7 @@ function Contact() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("handleSubmit triggered"); // Debugging statement
+    e.preventDefault(); // Prevent default behavior for form submission
     const newErrors = {};
     if (!formData.name || formData.name.length < 4) {
       newErrors.name = "Please enter a valid name of at least 4 characters.";
@@ -35,13 +33,15 @@ function Contact() {
     }
     console.log("Validation errors:", newErrors); // Debugging
     if (Object.keys(newErrors).length > 0) {
-      console.log(newErrors);
+      console.log("Validation failed:", newErrors);
       setErrors(newErrors); // Update errors state
       return;
     }
+    console.log("Validation passed. Sending form...");
     setErrors({});
     setStatus(" Sending...");
     setTimeout(() => {
+      console.log("Form successfully sent.");
       setStatus("Your message has been sent. Thank you!");
       setformData({
         name: "",
@@ -49,7 +49,7 @@ function Contact() {
         subject: "",
         message: "",
       });
-    }, 2000);
+    }, 1000);
   };
 
   return (
@@ -65,7 +65,7 @@ function Contact() {
               data-aos="fade-up"
               data-aos-delay={200}
             >
-              <form onSubmit={handleSubmit} className="php-email-form">
+              <form onSubmit={handleSubmit} className="custom-form">
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="name">Your Name</label>
